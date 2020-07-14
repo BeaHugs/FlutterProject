@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'config.dart';
+import 'config/http_config.dart';
 
 class HttpRequest {
   static final BaseOptions baseOptions = BaseOptions(

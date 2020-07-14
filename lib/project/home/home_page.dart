@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutterapp/project/models/article.dart';
-import 'package:flutterapp/project/service/api/home_api.dart';
+import 'package:FlutterProject/project/models/article.dart';
+import 'package:FlutterProject/project/service/api/home_api.dart';
 
 import 'home_content_list.dart';
 

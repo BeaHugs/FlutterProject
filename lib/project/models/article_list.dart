@@ -1,4 +1,4 @@
-import 'package:flutterapp/project/models/article.dart';
+import 'package:FlutterProject/project/models/article.dart';
 
 class ArticleList {
   ArticleListData data;

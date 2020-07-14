@@ -3,9 +3,9 @@
 
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutterapp/project/home/home_content.dart';
-import 'package:flutterapp/project/home/home_page.dart';
-import 'package:flutterapp/project/mine/mine_content.dart';
+import 'package:FlutterProject/project/home/home_content.dart';
+import 'package:FlutterProject/project/home/home_page.dart';
+import 'package:FlutterProject/project/mine/mine_content.dart';
 
 import 'bottom_bar_item.dart';
 

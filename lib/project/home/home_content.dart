@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutterapp/project/home/home_page.dart';
-import 'package:flutterapp/project/main/info_bar_item.dart';
-import 'package:flutterapp/project/models/article.dart';
-import 'package:flutterapp/project/models/project_tree.dart';
-import 'package:flutterapp/project/service/api/home_api.dart';
-import 'package:flutterapp/project/service/http_request.dart';
-import 'package:flutterapp/project/widget/dashed_line.dart';
-import 'package:flutterapp/project/widget/star_rating.dart';
+import 'package:FlutterProject/project/home/home_page.dart';
+import 'package:FlutterProject/project/main/info_bar_item.dart';
+import 'package:FlutterProject/project/models/article.dart';
+import 'package:FlutterProject/project/models/project_tree.dart';
+import 'package:FlutterProject/project/service/api/home_api.dart';
+import 'package:FlutterProject/project/service/http_request.dart';
+import 'package:FlutterProject/project/widget/dashed_line.dart';
+import 'package:FlutterProject/project/widget/star_rating.dart';
 
 import 'home_content_list.dart';
 

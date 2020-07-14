@@ -1,6 +1,9 @@
+import 'package:FlutterProject/project/widget/article_tag.dart';
+import 'package:FlutterProject/project/widget/image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/project/models/article.dart';
+import 'package:FlutterProject/project/models/article.dart';
+import 'package:quiver/strings.dart';
 
 class WybContentListItem extends StatefulWidget {
   final Data article;
@@ -14,27 +17,22 @@ class WybContentListItem extends StatefulWidget {
 class _WybContentListItemState extends State<WybContentListItem> {
   @override
   Widget build(BuildContext context) {
-    if (widget.article.type == 1) {
-      return Container(
-        padding: EdgeInsets.fromLTRB(15, 5, 10, 3),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [buildArticleTitle(), buildArticleWidget()],
-        ),
-      );
-    } else if (widget.article.type == 0) {
-      return Container(
-        padding: EdgeInsets.fromLTRB(15, 5, 10, 3),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Divider(height: 1.0, color: Color(0xcccccccc)),
-            buildArticleTitle(),
-            buildArticleWidget()
-          ],
-        ),
-      );
-    }
+    return Container(
+      decoration: BoxDecoration(
+          border: Border(
+        bottom: Divider.createBorderSide(context, width: 0.7),
+      )),
+      padding: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildArticleAuthorInfo(),
+          buildArticleTitle(),
+          buildArticleWidget()
+        ],
+      ),
+    );
   }
 
   Widget buildArticleTitle() {
@@ -54,7 +52,6 @@ class _WybContentListItemState extends State<WybContentListItem> {
   Widget buildArticleWidget() {
     return Container(
         child: Row(
-
       children: buildArticleWidgetChild(),
     ));
   }
@@ -63,50 +60,51 @@ class _WybContentListItemState extends State<WybContentListItem> {
     List<Widget> wChilds = [];
 
     if (widget.article.type == 1) {
-      wChilds.add(
-        Text(
-          "置顶",
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.red,
-          ),
-        ),
-      );
-      wChilds.add(
-        SizedBox(
-          width: 5,
-        ),
-      );
+      wChilds.add(WybArticleTag("置顶"));
     }
-    wChilds.add(Text(
-      "${widget.article.author}${widget.article.shareUser}",
-      style: TextStyle(
-        fontSize: 12,
-        color: Colors.grey,
-      ),
-    ));
-    wChilds.add(SizedBox(
-      width: 5,
-    ));
-    wChilds.add(Text(
-      widget.article.niceDate,
-      style: TextStyle(
-        fontSize: 12,
-        color: Colors.grey,
-      ),
-    ));
 
-//    wChilds.add(Padding(
-//      padding: EdgeInsets.fromLTRB(100, 0, 0, 0),
-//      child: Text(
-//          widget.article.niceDate,
-//          style: TextStyle(
-//            fontSize: 12,
-//            color: Colors.grey,
-//          ),
-//      ),
-//    ));
+    wChilds.add(Padding(
+      padding: EdgeInsets.symmetric(horizontal: 3),
+      child: Text(
+        (widget.article.superChapterName != null
+                ? widget.article.superChapterName + ' · '
+                : '') +
+            (widget.article.chapterName ?? ''),
+        style: TextStyle(
+          fontSize: 10,
+        ),
+      ),
+    ));
 
     return wChilds;
+  }
+
+  Widget _buildArticleAuthorInfo() {
+    return Row(
+      children: [
+        ClipOval(
+          child: WrapperImage(
+            imageType: ImageType.random,
+            url: widget.article.author,
+            height: 20,
+            width: 20,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 5),
+          child: Text(
+            isNotBlank(widget.article.author)
+                ? widget.article.author
+                : widget.article.shareUser ?? '',
+            style: Theme.of(context).textTheme.caption,
+          ),
+        ),
+        Expanded(
+          child: SizedBox.shrink(),
+        ),
+        Text(widget.article.niceDate,
+            style: Theme.of(context).textTheme.caption),
+      ],
+    );
   }
 }
