@@ -1,7 +1,10 @@
+import 'package:FlutterProject/project/models/banner.dart';
+import 'package:FlutterProject/project/widget/banner_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:FlutterProject/project/models/article.dart';
 import 'package:FlutterProject/project/service/api/home_api.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'home_content_list.dart';
 
@@ -20,6 +23,27 @@ class _WybHomePageState extends State<WybHomePage> {
     return EasyRefresh.custom(
       // firstRefresh: true,
       slivers: [
+        SliverList(
+          delegate: SliverChildListDelegate([
+            Container(
+              height: 180.0,
+              child: ScrollNotificationInterceptor(
+                child: Swiper(
+                    duration: 2000,
+                  itemBuilder: (BuildContext context, int index) {
+                    return WybBannerItem(banners[index].imagePath);
+                  },
+                  itemCount: banners.length,
+                  //viewportFraction: 0.8,
+                  //scale: 0.9,
+                  autoplay: true,
+                  autoplayDelay: 7000,
+
+                ),
+              ),
+            ),
+          ]),
+        ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
@@ -45,6 +69,8 @@ class _WybHomePageState extends State<WybHomePage> {
   @override
   void initState() {
     _onRefreshData();
+
+    _getBanner();
   }
 
   List<Data> article = [];
@@ -70,5 +96,14 @@ class _WybHomePageState extends State<WybHomePage> {
       });
     });
   }
+
+
+  List<BannerData> banners = [];
+  void _getBanner(){
+    getBanner().then((res){
+      banners.addAll(res);
+    });
+  }
+
 
 }

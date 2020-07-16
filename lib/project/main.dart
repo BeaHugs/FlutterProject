@@ -16,10 +16,12 @@ class _WybState extends State<WybRunApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(        home: Scaffold(
-          appBar: AppBar(
-            title: Text("底部导航"),
-          ),
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+//          appBar: AppBar(
+//            title: Text("底部导航"),
+//          ),
           body: IndexedStack(
             index: indexPage,
             children: pageItems,
@@ -27,7 +29,7 @@ class _WybState extends State<WybRunApp> {
           bottomNavigationBar: BottomNavigationBar(
             selectedFontSize: 15,
             unselectedFontSize: 15,
-            iconSize: 30,
+            iconSize: 15,
             selectedLabelStyle: TextStyle(color: Colors.red),
             unselectedLabelStyle: TextStyle(color: Colors.black),
             currentIndex: indexPage,

@@ -1,5 +1,6 @@
 //置顶文章
 
+import 'package:FlutterProject/project/models/banner.dart';
 import 'package:dio/dio.dart';
 import 'package:FlutterProject/project/models/article.dart';
 import 'package:FlutterProject/project/models/article_list.dart';
@@ -51,5 +52,21 @@ Future<List<TreeData>> getProjectTree() async{
   trees.addAll(tree_list.data);
 
   return trees;
+
+}
+
+
+
+Future<List<BannerData>> getBanner() async {
+
+  List<BannerData> banners = [];
+
+  var banners_future = await HttpRequest.request("banner/json");
+
+  var banner_list = Banners.fromJson(banners_future);
+
+  banners.addAll(banner_list.data);
+
+  return banners;
 
 }
