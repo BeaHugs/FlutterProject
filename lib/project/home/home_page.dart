@@ -84,7 +84,6 @@ class _WybHomePageState extends State<WybHomePage> {
         article.clear();
         article.addAll(res); // = res.data;
       });
-      //print(res);
     });
   }
 
