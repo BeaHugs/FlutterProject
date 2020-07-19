@@ -80,6 +80,7 @@ class _WybContentListItemState extends State<WybContentListItem> {
   }
 
   Widget _buildArticleAuthorInfo() {
+    
     return Row(
       children: [
         ClipOval(

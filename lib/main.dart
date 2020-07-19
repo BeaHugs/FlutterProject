@@ -1,8 +1,11 @@
 import 'dart:math';
 
+import 'package:FlutterProject/project/models/user.dart';
+import 'package:FlutterProject/project/viewmodel/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:provider/provider.dart';
 
 import 'day/day01.dart';
 import 'day/day02.dart';
@@ -13,14 +16,19 @@ main() => runApp(WybStackDemo());
 class WybStackDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider( create :(ctx) => UserModel(User("wangyibo")))
+      ],
+      child: MaterialApp(
+          home: Scaffold(
 //        appBar: AppBar(
 //          title: Text("Stack"),
 //        ),
-          body: WybGridView(),
-        ),
+            body: WybGridView(),
+          ),
 
+      ),
     );
   }
 }

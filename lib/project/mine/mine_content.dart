@@ -1,6 +1,9 @@
+import 'package:FlutterProject/project/viewmodel/user_model.dart';
+import 'package:FlutterProject/project/widget/image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:provider/provider.dart';
 
 class WyMineBody extends StatefulWidget {
   @override
@@ -33,7 +36,6 @@ class _WybHomeBodyState extends State<WyMineBody> {
             removeTop: true,
             child: NotificationListener(
               onNotification: (scrollNotification) {
-                //只有当是更新状态下和是第0个child的时候才会调用
                 if (scrollNotification is ScrollUpdateNotification &&
                     scrollNotification.depth == 0) {
                   __onScroll(scrollNotification.metrics.pixels);
@@ -42,14 +44,36 @@ class _WybHomeBodyState extends State<WyMineBody> {
               child: EasyRefresh.custom(
                 slivers: [
                   SliverList(
-                    delegate: SliverChildListDelegate(
-                      List.generate(50, (index) {
-                        return Container(
-                          padding: EdgeInsets.all(10),
-                          child: Text("ces"),
-                        );
-                      }),
-                    ),
+                    delegate: SliverChildListDelegate([
+                      Container(
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(6.0),
+                              child: WrapperImage(
+                                imageType: ImageType.random,
+                                url: "扔无线",
+                                height: 60,
+                                width: 60,
+                              ),
+                            ),
+
+
+                            Consumer<UserModel>(
+
+                              builder: (ctx,userModel,child){
+
+                                return Text(userModel.user.userName);
+                              },
+
+                              //child: ,
+                            )
+
+                            //Text("username")
+                          ],
+                        ),
+                      ),
+                    ]),
                   )
                 ],
               ),
