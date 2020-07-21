@@ -45,33 +45,69 @@ class _WybHomeBodyState extends State<WyMineBody> {
                 slivers: [
                   SliverList(
                     delegate: SliverChildListDelegate([
-                      Container(
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(6.0),
-                              child: WrapperImage(
-                                imageType: ImageType.random,
-                                url: "扔无线",
-                                height: 60,
-                                width: 60,
+                      GestureDetector(
+                        child: Container(
+                          child: new Stack(
+                            children: <Widget>[
+                              ClipPath(
+                                clipper: new TopBarClipper(
+                                    MediaQuery.of(context).size.width, 200.0),
+                                child: new SizedBox(
+                                  width: double.infinity,
+                                  height: 200.0,
+                                  child: new Container(
+                                    width: double.infinity,
+                                    height: 240.0,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
                               ),
-                            ),
-
-
-                            Consumer<UserModel>(
-
-                              builder: (ctx,userModel,child){
-
-                                return Text(userModel.user.userName);
-                              },
-
-                              //child: ,
-                            )
-
-                            //Text("username")
-                          ],
+                              // 名字
+                              Container(
+                                margin: new EdgeInsets.only(top: 60.0),
+                                child: new Center(
+                                  child: Consumer<UserModel>(
+                                    builder: (ctx, userModel, child) {
+                                      return Text(userModel.user.userName);
+                                    },
+                                    //child: ,
+                                  ),
+                                ),
+                              ),
+                              // 图标
+                              Container(
+                                margin: new EdgeInsets.only(top: 100.0),
+                                child: new Center(
+                                    child: new Container(
+                                  width: 60.0,
+                                  height: 60.0,
+                                  child: new PreferredSize(
+                                    child: new Container(
+                                      child: new ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0),
+                                        child: new Container(
+                                          color: Colors.white,
+                                          child: WrapperImage(
+                                            imageType: ImageType.random,
+                                            url: "扔无线",
+                                            height: 60,
+                                            width: 60,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    preferredSize: new Size(80.0, 80.0),
+                                  ),
+                                )),
+                              ),
+                            ],
+                          ),
                         ),
+                        onTap: () {
+
+
+                        },
                       ),
                     ]),
                   )
@@ -98,5 +134,29 @@ class _WybHomeBodyState extends State<WyMineBody> {
         ),
       ],
     );
+  }
+}
+
+// 顶部栏裁剪
+class TopBarClipper extends CustomClipper<Path> {
+  // 宽高
+  double width;
+  double height;
+
+  TopBarClipper(this.width, this.height);
+
+  @override
+  Path getClip(Size size) {
+    Path path = new Path();
+    path.moveTo(0.0, 0.0);
+    path.lineTo(width, 0.0);
+    path.lineTo(width, height / 2);
+    path.lineTo(0.0, height);
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return true;
   }
 }
