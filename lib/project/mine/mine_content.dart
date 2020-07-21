@@ -1,3 +1,5 @@
+import 'package:FlutterProject/project/login/page/login_page.dart';
+import 'package:FlutterProject/project/login/widgets/my_text_field.dart';
 import 'package:FlutterProject/project/viewmodel/user_model.dart';
 import 'package:FlutterProject/project/widget/image.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,6 +28,9 @@ class _WybHomeBodyState extends State<WyMineBody> {
       appBarAlpha = alpha;
     });
   }
+  final TextEditingController _nameController = TextEditingController();
+  final FocusNode _nodeText1 = FocusNode();
+
 
   @override
   Widget build(BuildContext context) {
@@ -107,8 +112,23 @@ class _WybHomeBodyState extends State<WyMineBody> {
                         onTap: () {
 
 
+                          Navigator.of(context).push(new  MaterialPageRoute(builder: (ctx){
+                            return LoginPage();
+                          }));
+
                         },
                       ),
+                      Container(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
+                        child: MyTextField(
+                          key: const Key('phone'),
+                          controller: _nameController,
+                          focusNode: _nodeText1,
+                          maxLength: 11,
+                          keyboardType: TextInputType.phone,
+                          hintText: "手机",
+                        ),
+                      )
                     ]),
                   )
                 ],

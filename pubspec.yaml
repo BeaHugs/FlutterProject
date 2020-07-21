@@ -51,6 +51,12 @@ dependencies:
 
   provider: ^4.3.1
 
+    # 处理键盘事件 https://github.com/diegoveloper/flutter_keyboard_actions
+  keyboard_actions: ^3.3.0
+
+    # Dart 常用工具类库 https://github.com/Sky24n/common_utils
+  common_utils: 1.2.1
+
 
 
 dev_dependencies:
@@ -72,6 +78,7 @@ flutter:
   assets:
     - assets/images/timg.jpg
     - assets/images/tabbar/
+    - assets/images/login/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
