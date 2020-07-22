@@ -1,9 +1,13 @@
 import 'package:FlutterProject/project/login/widgets/my_text_field.dart';
+import 'package:FlutterProject/project/models/user.dart';
+import 'package:FlutterProject/project/service/api/login_api.dart';
+import 'package:FlutterProject/project/viewmodel/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:provider/provider.dart';
 
 /// design/1注册登录/index.html
 class LoginPage extends StatefulWidget {
@@ -55,9 +59,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login() {}
+  UserModel usermodel = null;
 
   @override
   Widget build(BuildContext context) {
+    usermodel = Provider.of<UserModel>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -95,13 +102,12 @@ class _LoginPageState extends State<LoginPage> {
           style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 16),
-
         MyTextField(
           key: const Key('phone'),
           focusNode: _nodeText1,
           controller: _nameController,
           maxLength: 11,
-          keyboardType: TextInputType.phone,
+          //keyboardType: TextInputType.phone,
           hintText: "请输入账号",
         ),
         SizedBox(
@@ -120,11 +126,26 @@ class _LoginPageState extends State<LoginPage> {
         SizedBox(
           height: 16,
         ),
-    LoginButtonWidget(
-      child: Text("登录",style: TextStyle(fontSize: 18,color: Colors.white),),
-    )
+        LoginButtonWidget(
+          child: Text(
+            "登录",
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          ),
+          onPressed: () {
+            var username = _nameController.text;
+            var password = _passwordController.text;
 
-
+            Map<String,String> map = {
+              "username":username,
+              "password":password
+            };
+            usermodel.userLogin(map).then((value) {
+              if(value){
+                Navigator.of(context).pop();
+              }
+            });
+          },
+        )
       ];
 }
 
@@ -137,19 +158,18 @@ class LoginButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var color = Theme.of(context).primaryColor.withAlpha(180);
-    return  Container(
-      width:double.infinity,
+    return Container(
+      width: double.infinity,
       padding: EdgeInsets.all(1),
-        child: CupertinoButton(
-              padding: EdgeInsets.all(0),
-              color: color,
-              disabledColor: color,
-              borderRadius: BorderRadius.circular(5),
-              pressedOpacity: 0.5,
-              child: child,
-              onPressed: onPressed,
-            ),
-      );
-
+      child: CupertinoButton(
+        padding: EdgeInsets.all(0),
+        color: color,
+        disabledColor: color,
+        borderRadius: BorderRadius.circular(5),
+        pressedOpacity: 0.5,
+        child: child,
+        onPressed: onPressed,
+      ),
+    );
   }
 }

@@ -57,6 +57,10 @@ dependencies:
     # Dart 常用工具类库 https://github.com/Sky24n/common_utils
   common_utils: 1.2.1
 
+  shared_preferences: ^0.5.3+5
+    # 本地json对象存储
+  localstorage: ^2.0.0
+
 
 
 dev_dependencies:

@@ -17,7 +17,7 @@ class HttpRequest {
     // 创建默认的全局拦截器
     Interceptor dInter = InterceptorsWrapper(
       onRequest: (options) {
-        print("请求拦截");
+        //print("请求拦截");
         return options;
       },
       onResponse: (response) {
@@ -25,7 +25,7 @@ class HttpRequest {
         return response;
       },
       onError: (err) {
-        print("错误拦截");
+        //print("错误拦截");
         return err;
       }
     );

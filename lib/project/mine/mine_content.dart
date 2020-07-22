@@ -2,6 +2,7 @@ import 'package:FlutterProject/project/login/page/login_page.dart';
 import 'package:FlutterProject/project/login/widgets/my_text_field.dart';
 import 'package:FlutterProject/project/viewmodel/user_model.dart';
 import 'package:FlutterProject/project/widget/image.dart';
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -73,7 +74,7 @@ class _WybHomeBodyState extends State<WyMineBody> {
                                 child: new Center(
                                   child: Consumer<UserModel>(
                                     builder: (ctx, userModel, child) {
-                                      return Text(userModel.user.userName);
+                                      return Text(userModel.user.data == null?"未登录":userModel.user.data.nickname);
                                     },
                                     //child: ,
                                   ),
@@ -110,25 +111,12 @@ class _WybHomeBodyState extends State<WyMineBody> {
                           ),
                         ),
                         onTap: () {
-
-
                           Navigator.of(context).push(new  MaterialPageRoute(builder: (ctx){
                             return LoginPage();
                           }));
 
                         },
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
-                        child: MyTextField(
-                          key: const Key('phone'),
-                          controller: _nameController,
-                          focusNode: _nodeText1,
-                          maxLength: 11,
-                          keyboardType: TextInputType.phone,
-                          hintText: "手机",
-                        ),
-                      )
                     ]),
                   )
                 ],

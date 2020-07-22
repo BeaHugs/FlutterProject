@@ -18,7 +18,7 @@ class WybStackDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider( create :(ctx) => UserModel(User("wangyibo")))
+        //ChangeNotifierProvider( create :(ctx) => UserModel(User("wangyibo")))
       ],
       child: MaterialApp(
           home: Scaffold(

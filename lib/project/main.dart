@@ -1,3 +1,4 @@
+import 'package:FlutterProject/project/service/config/storage_manager.dart';
 import 'package:FlutterProject/project/viewmodel/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,9 @@ import 'package:provider/provider.dart';
 import 'main/info_bar_item.dart';
 import 'models/user.dart';
 
-main(){
-
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await StorageManager.init();
   runApp(WybRunApp());
   // Android状态栏透明 splash为白色,所以调整状态栏文字为黑色
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -28,9 +30,11 @@ class _WybState extends State<WybRunApp> {
 
   @override
   Widget build(BuildContext context) {
+
+    var item = StorageManager.localStorage.getItem(UserModel.kUser);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider( create :(ctx) => UserModel(User("wangyibo")))
+        ChangeNotifierProvider( create :(ctx) => UserModel(User.fromJson(item)))
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
