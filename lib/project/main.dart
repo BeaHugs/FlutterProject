@@ -34,7 +34,7 @@ class _WybState extends State<WybRunApp> {
     var item = StorageManager.localStorage.getItem(UserModel.kUser);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider( create :(ctx) => UserModel(User.fromJson(item)))
+        ChangeNotifierProvider( create :(ctx) => UserModel(item == null ? User():User.fromJson(item)))
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

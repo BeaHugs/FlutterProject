@@ -85,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
               padding:
                   const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 //keyboardConfig: Utils.getKeyboardActionsConfig(context, <FocusNode>[_nodeText1, _nodeText2]),
                 children: _buildBody,
@@ -135,17 +136,17 @@ class _LoginPageState extends State<LoginPage> {
             var username = _nameController.text;
             var password = _passwordController.text;
 
-            Map<String,String> map = {
-              "username":username,
-              "password":password
+            Map<String, String> map = {
+              "username": username,
+              "password": password
             };
             usermodel.userLogin(map).then((value) {
-              if(value){
+              if (value) {
                 Navigator.of(context).pop();
               }
             });
           },
-        )
+        ),
       ];
 }
 
