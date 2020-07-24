@@ -1,3 +1,4 @@
+import 'package:FlutterProject/project/login/page/register_page.dart';
 import 'package:FlutterProject/project/login/widgets/my_text_field.dart';
 import 'package:FlutterProject/project/models/user.dart';
 import 'package:FlutterProject/project/service/api/login_api.dart';
@@ -82,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
           SliverList(
               delegate: SliverChildListDelegate([
             Container(
+              //height: double.infinity,
               padding:
                   const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
               child: Column(
@@ -125,7 +127,23 @@ class _LoginPageState extends State<LoginPage> {
           hintText: "请输入密码",
         ),
         SizedBox(
-          height: 16,
+          height: 13,
+        ),
+        GestureDetector(
+          onTap: () {
+
+            Navigator.of(context).push(new  MaterialPageRoute(builder: (ctx){
+              return  RegisterPage();
+            }));
+
+          },
+          child: Container(
+            alignment: Alignment.centerRight,
+            child: Text("还没账号?去注册"),
+          ),
+        ),
+        SizedBox(
+          height: 13,
         ),
         LoginButtonWidget(
           child: Text(
