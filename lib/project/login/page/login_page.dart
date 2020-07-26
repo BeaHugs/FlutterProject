@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:provider/provider.dart';
+import 'package:toast/toast.dart';
 
 /// design/1注册登录/index.html
 class LoginPage extends StatefulWidget {
@@ -131,11 +132,9 @@ class _LoginPageState extends State<LoginPage> {
         ),
         GestureDetector(
           onTap: () {
-
-            Navigator.of(context).push(new  MaterialPageRoute(builder: (ctx){
-              return  RegisterPage();
+            Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) {
+              return RegisterPage();
             }));
-
           },
           child: Container(
             alignment: Alignment.centerRight,
@@ -159,8 +158,11 @@ class _LoginPageState extends State<LoginPage> {
               "password": password
             };
             usermodel.userLogin(map).then((value) {
-              if (value) {
+              if (value.errorCode == 0) {
                 Navigator.of(context).pop();
+              } else {
+                Toast.show(value.errorMsg, context,
+                    duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
               }
             });
           },

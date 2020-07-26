@@ -1,6 +1,8 @@
 import 'package:FlutterProject/project/models/banner.dart';
+import 'package:FlutterProject/project/viewmodel/flutter_webview.dart';
 import 'package:FlutterProject/project/widget/banner_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:FlutterProject/project/models/article.dart';
 import 'package:FlutterProject/project/service/api/home_api.dart';
@@ -31,7 +33,13 @@ class _WybHomePageState extends State<WybHomePage> {
                 child: Swiper(
                     duration: 2000,
                   itemBuilder: (BuildContext context, int index) {
-                    return WybBannerItem(banners[index].imagePath);
+                    return GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).push(new MaterialPageRoute(builder: (ctx){
+                            return WebViewExample(banners[index].url);
+                          }));
+                        },
+                        child: WybBannerItem(banners[index].imagePath));
                   },
                   itemCount: banners.length,
                   //viewportFraction: 0.8,

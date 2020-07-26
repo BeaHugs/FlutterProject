@@ -13,3 +13,13 @@ Future<User> login(Map<String,String> map) async {
   return user;
 
 }
+
+Future<User> register(Map<String,String> map) async {
+
+     var register = await HttpRequest.request("user/register",method: "post",params: map);
+
+     var user = User.fromJson(register);
+
+     return user;
+
+}

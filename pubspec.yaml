@@ -61,6 +61,16 @@ dependencies:
     # 本地json对象存储
   localstorage: ^2.0.0
 
+  # add this line to your dependencies
+  toast: ^0.1.5
+
+  webview_flutter: ^0.3.22+1
+
+  flutter_webview_plugin: ^0.3.0
+
+
+
+
 
 
 dev_dependencies:

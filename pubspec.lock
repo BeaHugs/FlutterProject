@@ -161,6 +161,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_webview_plugin:
+    dependency: "direct main"
+    description:
+      name: flutter_webview_plugin
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.11"
   fluttertoast:
     dependency: "direct main"
     description:
@@ -418,6 +425,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.15"
+  toast:
+    dependency: "direct main"
+    description:
+      name: toast
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.5"
   transformer_page_view:
     dependency: transitive
     description:
@@ -446,6 +460,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.8"
+  webview_flutter:
+    dependency: "direct main"
+    description:
+      name: webview_flutter
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.22+1"
   xdg_directories:
     dependency: transitive
     description:

@@ -21,13 +21,19 @@ class UserModel extends ChangeNotifier {
     StorageManager.localStorage.setItem(kUser, _user);
   }
 
-  Future<bool> userLogin(Map<String, String> map) async {
+  Future<User> userLogin(Map<String, String> map) async {
     var user = await login(map);
 
     if(user.errorCode == 0){
       setUser(user);
-      return true;
+      return user;
     }
-    return false;
+    return user;
   }
+
+  Future<User>  userRegister(Map<String,String> map) async {
+    var user = await register(map);
+    return user;
+  }
+
 }

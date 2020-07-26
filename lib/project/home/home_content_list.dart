@@ -1,3 +1,4 @@
+import 'package:FlutterProject/project/viewmodel/flutter_webview.dart';
 import 'package:FlutterProject/project/widget/article_tag.dart';
 import 'package:FlutterProject/project/widget/image.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,20 +18,27 @@ class WybContentListItem extends StatefulWidget {
 class _WybContentListItemState extends State<WybContentListItem> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border(
-        bottom: Divider.createBorderSide(context, width: 0.7),
-      )),
-      padding: EdgeInsets.symmetric(vertical: 10),
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildArticleAuthorInfo(),
-          buildArticleTitle(),
-          buildArticleWidget()
-        ],
+    return GestureDetector(
+      onTap: (){
+        Navigator.of(context).push(new MaterialPageRoute(builder: (ctx){
+          return WebViewExample(widget.article.link);
+        }));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border(
+          bottom: Divider.createBorderSide(context, width: 0.7),
+        )),
+        padding: EdgeInsets.symmetric(vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildArticleAuthorInfo(),
+              buildArticleTitle(),
+              buildArticleWidget()
+            ],
+        ),
       ),
     );
   }
