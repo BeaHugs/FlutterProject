@@ -1,4 +1,7 @@
+import 'package:FlutterProject/project/service/config/storage_manager.dart';
+import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'config/http_config.dart';
 
 class HttpRequest {
@@ -29,7 +32,11 @@ class HttpRequest {
         return err;
       }
     );
-    List<Interceptor> inters = [dInter];
+
+    var cookieManager = CookieManager(PersistCookieJar(dir: StorageManager.temporaryDirectory.path));
+
+
+    List<Interceptor> inters = [dInter,cookieManager];
 
     // 请求单独拦截器
     if (inter != null) {

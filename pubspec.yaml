@@ -37,7 +37,7 @@ dependencies:
   dio: ^3.0.2
   path_provider: ^1.6.0
   cookie_jar: ^1.0.0
-  dio_cookie_manager: 1.0.0
+  dio_cookie_manager: ^1.0.0
 
   #刷新
   flutter_easyrefresh: ^2.1.1
