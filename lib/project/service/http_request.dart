@@ -24,7 +24,8 @@ class HttpRequest {
         return options;
       },
       onResponse: (response) {
-        print("响应拦截");
+        
+        //print("响应拦截");
         return response;
       },
       onError: (err) {
