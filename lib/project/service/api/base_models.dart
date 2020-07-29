@@ -1,6 +1,8 @@
-abstract class BaseResponse{
+ class BaseResponse<T>{
 
-  dynamic data;
+  static const  int parse_error = 1000;
+
+  T data;
   int errorCode;
   String errorMsg;
 
@@ -20,3 +22,4 @@ abstract class BaseResponse{
     return data;
   }
 }
+

@@ -13,7 +13,17 @@ Future<List<Data>> getArticleTopData(int page) async {
 
   //var response = await Future.wait([HttpRequest.request("article/top/json"),HttpRequest.request("article/top/json")]);
 
+
+
+
+
+
+
   var response = await HttpRequest.request("article/top/json");
+
+
+
+
 
   var article_list = await getArticleListData(page);
 
