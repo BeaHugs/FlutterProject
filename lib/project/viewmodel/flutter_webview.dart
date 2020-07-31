@@ -112,11 +112,17 @@ class _WebViewExampleState extends State<WebViewExample> {
               });
         } else {
           setState(() {
-            collect = collect ? false : true;
+            widget.article.collect  = widget.article.collect ? false : true;
+
+            if(widget.article.collect){//-
+
+            }else{//+
+
+            }
           });
         }
       },
-      child: Icon(collect ? Icons.favorite : Icons.favorite_border),
+      child: Icon(widget.article.collect  ? Icons.favorite : Icons.favorite_border,),
     );
   }
 }

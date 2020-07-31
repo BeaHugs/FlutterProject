@@ -1,5 +1,6 @@
 import 'package:FlutterProject/project/login/page/login_page.dart';
 import 'package:FlutterProject/project/login/widgets/my_text_field.dart';
+import 'package:FlutterProject/project/mine/collect_page.dart';
 import 'package:FlutterProject/project/viewmodel/user_model.dart';
 import 'package:FlutterProject/project/widget/image.dart';
 import 'package:common_utils/common_utils.dart';
@@ -29,9 +30,9 @@ class _WybHomeBodyState extends State<WyMineBody> {
       appBarAlpha = alpha;
     });
   }
+
   final TextEditingController _nameController = TextEditingController();
   final FocusNode _nodeText1 = FocusNode();
-
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,9 @@ class _WybHomeBodyState extends State<WyMineBody> {
                                 child: new Center(
                                   child: Consumer<UserModel>(
                                     builder: (ctx, userModel, child) {
-                                      return Text(userModel.user.data  == null?"未登录":userModel.user.data.nickname);
+                                      return Text(userModel.user.data == null
+                                          ? "未登录"
+                                          : userModel.user.data.nickname);
                                     },
                                     //child: ,
                                   ),
@@ -111,11 +114,24 @@ class _WybHomeBodyState extends State<WyMineBody> {
                           ),
                         ),
                         onTap: () {
-                          Navigator.of(context).push(new  MaterialPageRoute(builder: (ctx){
+                          Navigator.of(context)
+                              .push(new MaterialPageRoute(builder: (ctx) {
                             return LoginPage();
                           }));
-
                         },
+                      ),
+                      ListTile(
+                        title: Text("收藏"),
+                        onTap: () {
+                          Navigator.of(context).push(new MaterialPageRoute(builder: (ctx){
+                            return CollectPage();
+                          }));
+                        },
+                        leading: Icon(
+                          Icons.favorite_border,
+                          //color: ,
+                        ),
+                        trailing: Icon(Icons.chevron_right),
                       ),
                     ]),
                   )

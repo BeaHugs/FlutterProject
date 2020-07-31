@@ -1,5 +1,6 @@
 import 'package:FlutterProject/project/viewmodel/flutter_webview.dart';
 import 'package:FlutterProject/project/widget/article_tag.dart';
+import 'package:FlutterProject/project/widget/common/article_item.dart';
 import 'package:FlutterProject/project/widget/image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +35,10 @@ class _WybContentListItemState extends State<WybContentListItem> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildArticleAuthorInfo(),
-              buildArticleTitle(),
+              buildArticleAuthorInfo(context,author: isNotBlank(widget.article.author)
+                  ? widget.article.author
+                  : widget.article.shareUser ?? '',niceDate:widget.article.niceDate ),
+              buildArticleTitle(widget.article.title),
               buildArticleWidget()
             ],
         ),
@@ -43,19 +46,7 @@ class _WybContentListItemState extends State<WybContentListItem> {
     );
   }
 
-  Widget buildArticleTitle() {
-    return Container(
-      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-      child: Text(
-        widget.article.title,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontSize: 16,
-        ),
-      ),
-    );
-  }
+
 
   Widget buildArticleWidget() {
     return Container(
@@ -83,37 +74,7 @@ class _WybContentListItemState extends State<WybContentListItem> {
         ),
       ),
     ));
-
     return wChilds;
   }
 
-  Widget _buildArticleAuthorInfo() {
-    
-    return Row(
-      children: [
-        ClipOval(
-          child: WrapperImage(
-            imageType: ImageType.random,
-            url: widget.article.author,
-            height: 20,
-            width: 20,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 5),
-          child: Text(
-            isNotBlank(widget.article.author)
-                ? widget.article.author
-                : widget.article.shareUser ?? '',
-            style: Theme.of(context).textTheme.caption,
-          ),
-        ),
-        Expanded(
-          child: SizedBox.shrink(),
-        ),
-        Text(widget.article.niceDate,
-            style: Theme.of(context).textTheme.caption),
-      ],
-    );
-  }
 }
