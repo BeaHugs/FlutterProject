@@ -1,4 +1,6 @@
-class Article {
+import 'package:FlutterProject/project/service/api/base_models.dart';
+
+class Article  {
   List<Data> data;
   int errorCode;
   String errorMsg;
@@ -30,7 +32,6 @@ class Article {
   String toString() {
     return 'Article{data: $data, errorCode: $errorCode, errorMsg: $errorMsg}';
   }
-
 
 }
 
@@ -70,37 +71,37 @@ class Data {
 
   Data(
       {this.apkLink,
-        this.audit,
-        this.author,
-        this.canEdit,
-        this.chapterId,
-        this.chapterName,
-        this.collect,
-        this.courseId,
-        this.desc,
-        this.descMd,
-        this.envelopePic,
-        this.fresh,
-        this.id,
-        this.link,
-        this.niceDate,
-        this.niceShareDate,
-        this.origin,
-        this.prefix,
-        this.projectLink,
-        this.publishTime,
-        this.realSuperChapterId,
-        this.selfVisible,
-        this.shareDate,
-        this.shareUser,
-        this.superChapterId,
-        this.superChapterName,
-        this.tags,
-        this.title,
-        this.type,
-        this.userId,
-        this.visible,
-        this.zan});
+      this.audit,
+      this.author,
+      this.canEdit,
+      this.chapterId,
+      this.chapterName,
+      this.collect,
+      this.courseId,
+      this.desc,
+      this.descMd,
+      this.envelopePic,
+      this.fresh,
+      this.id,
+      this.link,
+      this.niceDate,
+      this.niceShareDate,
+      this.origin,
+      this.prefix,
+      this.projectLink,
+      this.publishTime,
+      this.realSuperChapterId,
+      this.selfVisible,
+      this.shareDate,
+      this.shareUser,
+      this.superChapterId,
+      this.superChapterName,
+      this.tags,
+      this.title,
+      this.type,
+      this.userId,
+      this.visible,
+      this.zan});
 
   Data.fromJson(Map<String, dynamic> json) {
     apkLink = json['apkLink'];
@@ -199,6 +200,4 @@ class Tags {
     data['url'] = this.url;
     return data;
   }
-
-
 }

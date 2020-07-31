@@ -1,18 +1,19 @@
- class BaseResponse<T>{
+ class BaseResponse<T> {
+  static const int parse_error = 1000;
 
-  static const  int parse_error = 1000;
-
-  T data;
+  dynamic data;
   int errorCode;
   String errorMsg;
 
   BaseResponse({this.data, this.errorCode, this.errorMsg});
 
   BaseResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'];
+    //print(json['data']);
+    data = json;
     errorCode = json['errorCode'];
     errorMsg = json['errorMsg'];
   }
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -22,4 +23,3 @@
     return data;
   }
 }
-

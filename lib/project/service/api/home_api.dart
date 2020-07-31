@@ -1,7 +1,6 @@
 //置顶文章
 
 import 'package:FlutterProject/project/models/banner.dart';
-import 'package:dio/dio.dart';
 import 'package:FlutterProject/project/models/article.dart';
 import 'package:FlutterProject/project/models/article_list.dart';
 import 'package:FlutterProject/project/models/project_tree.dart';
@@ -15,15 +14,7 @@ Future<List<Data>> getArticleTopData(int page) async {
 
 
 
-
-
-
-
   var response = await HttpRequest.request("article/top/json");
-
-
-
-
 
   var article_list = await getArticleListData(page);
 
@@ -50,9 +41,7 @@ Future<List<Data>> getArticleListData(int page) async {
   return articles;
 }
 
-
-Future<List<TreeData>> getProjectTree() async{
-
+Future<List<TreeData>> getProjectTree() async {
   List<TreeData> trees = [];
 
   var project_future = await HttpRequest.request("project/tree/json");
@@ -62,13 +51,9 @@ Future<List<TreeData>> getProjectTree() async{
   trees.addAll(tree_list.data);
 
   return trees;
-
 }
 
-
-
 Future<List<BannerData>> getBanner() async {
-
   List<BannerData> banners = [];
 
   var banners_future = await HttpRequest.request("banner/json");
@@ -78,5 +63,4 @@ Future<List<BannerData>> getBanner() async {
   banners.addAll(banner_list.data);
 
   return banners;
-
 }

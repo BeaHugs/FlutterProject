@@ -21,7 +21,7 @@ class _WybContentListItemState extends State<WybContentListItem> {
     return GestureDetector(
       onTap: (){
         Navigator.of(context).push(new MaterialPageRoute(builder: (ctx){
-          return WebViewExample(widget.article.link);
+          return WebViewExample(widget.article);
         }));
       },
       child: Container(

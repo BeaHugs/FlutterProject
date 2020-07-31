@@ -157,13 +157,8 @@ class _LoginPageState extends State<LoginPage> {
               "username": username,
               "password": password
             };
-            usermodel.userLogin(map).then((value) {
-              if (value.errorCode == 0) {
-                Navigator.of(context).pop();
-              } else {
-                Toast.show(value.errorMsg, context,
-                    duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
-              }
+            usermodel.userLogin(params: map,onSuccess: (user){
+              Navigator.of(context).pop();
             });
           },
         ),

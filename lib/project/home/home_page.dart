@@ -36,7 +36,7 @@ class _WybHomePageState extends State<WybHomePage> {
                     return GestureDetector(
                         onTap: (){
                           Navigator.of(context).push(new MaterialPageRoute(builder: (ctx){
-                            return WebViewExample(banners[index].url);
+                            return WebViewExample(banners[index]);
                           }));
                         },
                         child: WybBannerItem(banners[index].imagePath));

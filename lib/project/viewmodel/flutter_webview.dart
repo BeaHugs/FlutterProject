@@ -1,13 +1,17 @@
 import 'dart:async';
 
+import 'package:FlutterProject/project/login/page/login_page.dart';
+import 'package:FlutterProject/project/models/article.dart';
+import 'package:FlutterProject/project/viewmodel/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewExample extends StatefulWidget {
-  final String link;
+  final Data article;
 
-  WebViewExample(this.link);
+  WebViewExample(this.article);
 
   @override
   _WebViewExampleState createState() => _WebViewExampleState();
@@ -26,7 +30,7 @@ class _WebViewExampleState extends State<WebViewExample> {
       ),
       body: Builder(builder: (BuildContext context) {
         return WebView(
-          initialUrl: widget.link,
+          initialUrl: widget.article.link,
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);
@@ -52,7 +56,6 @@ class _WebViewExampleState extends State<WebViewExample> {
           gestureNavigationEnabled: true,
         );
       }),
-
       bottomNavigationBar: BottomAppBar(
         child: NavigationControls(_controller.future),
       ),
@@ -70,26 +73,51 @@ class _WebViewExampleState extends State<WebViewExample> {
         });
   }
 
-
   bool collect = false;
 
   Widget favoriteButton() {
-    return FutureBuilder<WebViewController>(
-        future: _controller.future,
-        builder: (BuildContext context,
-            AsyncSnapshot<WebViewController> controller) {
-          if (controller.hasData) {
-            return FloatingActionButton(
-              onPressed: ()  {
-                setState(() {
-                  collect = collect? false:true;
-                });
-              },
-              child: Icon(collect?Icons.favorite:Icons.favorite_border),
-            );
-          }
-          return Container();
-        });
+    return FloatingActionButton(
+      onPressed: () async {
+        var userModel = Provider.of<UserModel>(context, listen: false);
+
+        if (userModel.user.data == null) {
+          showCupertinoDialog(
+              context: context,
+              builder: (context) {
+                return CupertinoAlertDialog(
+                  //title: Text('提示'),
+                  content: Text('请先登录'),
+                  actions: <Widget>[
+                    CupertinoDialogAction(
+                      child: Text('取消'),
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      },
+                    ),
+                    CupertinoDialogAction(
+                      child: Text('确认'),
+                      onPressed: () {
+
+                        Navigator.of(context).pop(false);
+
+                        Navigator.of(context)
+                            .push(new MaterialPageRoute(builder: (ctx) {
+                          return LoginPage();
+                        }));
+
+                      },
+                    ),
+                  ],
+                );
+              });
+        } else {
+          setState(() {
+            collect = collect ? false : true;
+          });
+        }
+      },
+      child: Icon(collect ? Icons.favorite : Icons.favorite_border),
+    );
   }
 }
 
@@ -126,7 +154,9 @@ class NavigationControls extends StatelessWidget {
                       }
                     },
             ),
-            SizedBox(width: 50,),
+            SizedBox(
+              width: 50,
+            ),
             IconButton(
               icon: const Icon(Icons.arrow_forward_ios),
               onPressed: !webViewReady
@@ -136,8 +166,7 @@ class NavigationControls extends StatelessWidget {
                         await controller.goForward();
                       } else {
                         Scaffold.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text("无前进")),
+                          const SnackBar(content: Text("无前进")),
                         );
                         return;
                       }

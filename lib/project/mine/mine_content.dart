@@ -74,7 +74,7 @@ class _WybHomeBodyState extends State<WyMineBody> {
                                 child: new Center(
                                   child: Consumer<UserModel>(
                                     builder: (ctx, userModel, child) {
-                                      return Text(userModel.user.data == null?"未登录":userModel.user.data.nickname);
+                                      return Text(userModel.user.data  == null?"未登录":userModel.user.data.nickname);
                                     },
                                     //child: ,
                                   ),

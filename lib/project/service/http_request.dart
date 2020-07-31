@@ -1,5 +1,6 @@
 import 'package:FlutterProject/project/service/api/base_models.dart';
 import 'package:FlutterProject/project/service/config/storage_manager.dart';
+import 'package:FlutterProject/project/service/error_handle.dart';
 import 'package:FlutterProject/project/viewmodel/user_model.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
@@ -54,7 +55,7 @@ class HttpRequest {
     }
   }
 
-  static Future<BaseResponse<T>> requests<T>(String url,
+  static Future<BaseResponse<T>> _requests<T>(String url,
       {String method = "get",
       Map<String, dynamic> params,
       Interceptor inter}) async {
@@ -66,6 +67,7 @@ class HttpRequest {
     Interceptor dInter = InterceptorsWrapper(onRequest: (options) {
       return options;
     }, onResponse: (response) {
+      print("response拦截");
       return response;
     }, onError: (err) {
       //print("错误拦截");
@@ -89,10 +91,41 @@ class HttpRequest {
     try {
       Response response =
           await dio.request(url, queryParameters: params, options: options);
-      BaseResponse baseResponse = BaseResponse<T>.fromJson(response.data);
+      BaseResponse<T> baseResponse = BaseResponse<T>.fromJson(response.data);
       return baseResponse;
     } catch (e) {
-      return BaseResponse(errorCode: BaseResponse.parse_error, errorMsg: "数据出错!!!",data: null);
+      NetError netError = ExceptionHandle.handleException(e);
+      return BaseResponse(
+          errorCode: netError.code, errorMsg: netError.msg, data: null);
     }
   }
+
+  static Future requestNetWork(
+    String url, {
+    String method = "get",
+    Map<String, dynamic> params,
+    Interceptor inter,
+    NetSuccessCallback onSuccess,
+    NetErrorCallback onError,
+  }) {
+    return _requests(url, method: method, params: params, inter: inter)
+        .then((BaseResponse baseResponse) {
+      if (baseResponse.errorCode == 0) {
+        if (onSuccess != null) {
+          onSuccess(baseResponse.data);
+        }
+      } else {
+        if (onError != null) {
+          onError(baseResponse.errorCode, baseResponse.errorMsg);
+        }else{
+          Fluttertoast.showToast(msg: "${baseResponse.errorMsg}");
+          print("onError == null 错误状态同意处理");
+        }
+      }
+    });
+  }
 }
+
+typedef NetSuccessCallback<T> = Function(T data);
+typedef NetSuccessListCallback<T> = Function(List<T> data);
+typedef NetErrorCallback = Function(int code, String msg);

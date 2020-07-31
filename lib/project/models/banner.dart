@@ -1,3 +1,5 @@
+import 'package:FlutterProject/project/models/article.dart';
+
 class Banners {
   List<BannerData> data;
   int errorCode;
@@ -27,7 +29,7 @@ class Banners {
   }
 }
 
-class BannerData {
+class BannerData extends Data{
   String desc;
   int id;
   String imagePath;

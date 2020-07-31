@@ -3,6 +3,7 @@
 import 'package:FlutterProject/project/models/user.dart';
 import 'package:FlutterProject/project/service/api/login_api.dart';
 import 'package:FlutterProject/project/service/config/storage_manager.dart';
+import 'package:FlutterProject/project/service/http_request.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserModel extends ChangeNotifier {
@@ -21,14 +22,18 @@ class UserModel extends ChangeNotifier {
     StorageManager.localStorage.setItem(kUser, _user);
   }
 
-  Future<User> userLogin(Map<String, String> map) async {
-    var user = await login(map);
+  void userLogin({
+    Map<String, String> params,
+    NetSuccessCallback onSuccess,
+    NetErrorCallback onError,
+  }) async {
+    HttpRequest.requestNetWork("user/login", method: "post", params: params,
+        onSuccess: (data) {
+          var user = User.fromJson(data);
+          onSuccess(user);
+          setUser(user);
 
-    if(user.errorCode == 0){
-      setUser(user);
-      return user;
-    }
-    return user;
+        }, onError: onError);
   }
 
   Future<User>  userRegister(Map<String,String> map) async {

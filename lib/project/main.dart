@@ -64,7 +64,7 @@ class _WybState extends State<WybRunApp> {
           ),
           localizationsDelegates: [
             GlobalEasyRefreshLocalizations.delegate,
-
+            GlobalCupertinoLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
