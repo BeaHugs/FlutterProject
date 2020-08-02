@@ -117,6 +117,9 @@ class HttpRequest {
       } else {
         if (onError != null) {
           onError(baseResponse.errorCode, baseResponse.errorMsg);
+
+          print("onError!= null ${url}  code : ${baseResponse.errorCode} ");
+
         }else{
           Fluttertoast.showToast(msg: "${baseResponse.errorMsg}");
           print("onError == null 错误状态同意处理  code : ${baseResponse.errorCode} ");

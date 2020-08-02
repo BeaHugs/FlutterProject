@@ -44,7 +44,7 @@ class _WybHomePageState extends State<WybHomePage> {
                   itemCount: banners.length,
                   //viewportFraction: 0.8,
                   //scale: 0.9,
-                  autoplay: true,
+                  autoplay: banners.length == 0?false:true,
                   autoplayDelay: 7000,
 
                 ),
