@@ -79,7 +79,7 @@ class Datas  extends Data{
   bool canEdit;
   int chapterId;
   String chapterName;
-  bool collect;
+  bool collect = false;
   int courseId;
   String desc;
   String descMd;

@@ -122,7 +122,7 @@ class _WebViewExampleState extends State<WebViewExample> {
           });
         }
       },
-      child: Icon(widget.article.collect  ? Icons.favorite : Icons.favorite_border,),
+      child: Icon(widget.article.collect  ? Icons.favorite : Icons.favorite_border,color: Colors.red,),
     );
   }
 }
