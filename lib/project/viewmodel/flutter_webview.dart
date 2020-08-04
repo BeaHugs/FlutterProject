@@ -97,14 +97,12 @@ class _WebViewExampleState extends State<WebViewExample> {
                     CupertinoDialogAction(
                       child: Text('确认'),
                       onPressed: () {
-
                         Navigator.of(context).pop(false);
 
                         Navigator.of(context)
                             .push(new MaterialPageRoute(builder: (ctx) {
                           return LoginPage();
                         }));
-
                       },
                     ),
                   ],
@@ -112,18 +110,33 @@ class _WebViewExampleState extends State<WebViewExample> {
               });
         } else {
           setState(() {
-            widget.article.collect  = widget.article.collect ? false : true;
+            widget.article.collect = widget.article.collect ? false : true;
 
-            if(widget.article.collect){//-
+            if (_checkCollect()) {
 
-            }else{//+
+
+
+            } else {
+              //+
 
             }
           });
         }
       },
-      child: Icon(widget.article.collect  ? Icons.favorite : Icons.favorite_border,color: Colors.red,),
+      child: Icon(
+        widget.article.collect ? Icons.favorite : Icons.favorite_border,
+        color: Colors.red,
+      ),
     );
+  }
+
+  bool _checkCollect() {
+    var userModel = Provider.of<UserModel>(context, listen: false);
+
+    if (userModel.user.data.collectIds.removeAt(widget.article.id)) {
+      return true;
+    }
+    return false;
   }
 }
 

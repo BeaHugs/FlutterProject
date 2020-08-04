@@ -28,6 +28,7 @@ class Data {
   bool admin;
   int coinCount;
   String email;
+  List<Object> collectIds;
   String icon;
   int id;
   String nickname = "未登录";
@@ -54,6 +55,8 @@ class Data {
     admin = json['admin'];
 
     coinCount = json['coinCount'];
+
+    collectIds = json["collectIds"];
 
     email = json['email'];
     icon = json['icon'];
