@@ -112,7 +112,7 @@ class _WebViewExampleState extends State<WebViewExample> {
           setState(() {
             widget.article.collect = widget.article.collect ? false : true;
 
-            if (_checkCollect()) {
+            if (_checkCollect()) {//取消
 
 
 
