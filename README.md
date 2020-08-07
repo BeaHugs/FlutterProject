@@ -7,4 +7,4 @@ Flutter_WanAndroid
 ## 效果图
 | 首页 | 
 | ------------ | 
-| ![相册](https://github.com/BeaHugs/FlutterProject/images/flutterapp_home_img.png) | 
+| ![相册](https://github.com/BeaHugs/FlutterProject/blob/master/images/flutter_home_img.jpg) | 
